@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le métier de Dentiste</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3F5F4; --paper-2:#EBEFEE; --ink:#142935; --ink-soft:#3F5560;
+    --blue:#294B73; --blue-soft:#DCE7F2; --teal:#1F6F6B; --line:#C7D2D0; --line-soft:#DCE3E1;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+  ::selection{background:var(--blue);color:#fff;}
+  h1,h2{margin:0; font-family:'IBM Plex Sans',sans-serif; color:var(--blue);}
+  p{margin:0;}
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--teal);z-index:20;}
+  nav{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:16px clamp(20px,5vw,64px);background:rgba(243,245,244,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line-soft);}
+  .nav-mark{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:600;font-size:1.02rem;white-space:nowrap;}
+  .nav-mark svg{width:20px;height:20px;flex-shrink:0;}
+  .nav-links{display:flex;gap:24px;list-style:none;margin:0;padding:0;}
+  .nav-links a{font-size:.8rem;text-decoration:none;color:var(--ink-soft);border-bottom:1px solid transparent;padding-bottom:2px;transition:color .15s,border-color .15s;}
+  .nav-links a:hover{color:var(--blue);border-color:var(--blue);}
+  section{max-width:1180px;margin:0 auto;padding:74px clamp(20px,6vw,96px);}
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:40px;min-height:62vh;padding-top:64px;padding-bottom:58px;}
+  .label{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--teal);}
+  .label::before{content:'';width:22px;height:1px;background:var(--blue);}
+  .hero h1{font-size:clamp(3.2rem,7vw,5.8rem);line-height:.82;letter-spacing:-.055em;}
+  .title-top{display:block;font-size:.48em;font-weight:400;letter-spacing:-.045em;margin-bottom:.08em;}
+  .title-bottom{display:block;font-weight:700;}
+  .hero .sub{max-width:49ch;margin-top:24px;color:var(--ink-soft);font-size:1.06rem;}
+  .tooth-wrap{display:flex;justify-content:center;align-items:center;}
+  #tooth{width:min(260px,70vw);}
+  #tooth path{fill:none;stroke:var(--blue);stroke-width:1.6;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.1s ease forwards .3s;}
+  #tooth .fill-part{fill:var(--blue-soft);animation:draw 2.1s ease forwards .3s,fadeFill 1s ease forwards 1.6s;}
+  #tooth .accent-mark{fill:var(--teal);opacity:0;animation:pop .5s ease forwards 2s;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes fadeFill{to{fill:var(--blue-soft);}}
+  @keyframes pop{to{opacity:1;}}
+  .rule{border:0;border-top:1px solid var(--line-soft);margin:0;}
+  .section-head{display:flex;align-items:flex-start;gap:18px;margin-bottom:14px;}
+  .section-head::before{content:'■';color:var(--blue);font-size:.9rem;line-height:1.7;}
+  h2{font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.1;}
+  .section-intro{max-width:70ch;margin-bottom:18px;color:var(--ink-soft);}
+  .content-list{margin:0;padding-left:22px;color:var(--ink-soft);}
+  .content-list li{margin:5px 0;}
+  .content-list li::marker{color:var(--blue);}
+  .prescription{max-width:72ch;color:var(--ink-soft);}
+  .prescription p + p{margin-top:14px;}
+  .examples{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:26px;}
+  .example{border:1px solid var(--line);padding:22px;background:var(--paper-2);}
+  .example h3{margin:0 0 8px;color:var(--blue);font-family:'Fraunces',serif;font-size:1.1rem;}
+  .example p{color:var(--ink-soft);font-size:.94rem;}
+  .study-section{background:linear-gradient(135deg,var(--paper) 0%,#E7EEF5 100%);}
+  .study-intro{max-width:70ch;color:var(--ink-soft);margin-bottom:28px;}
+  .study-intro strong{color:var(--blue);}
+  .study-table-wrap{overflow-x:auto;border:1px solid var(--ink);background:rgba(255,255,255,.28);box-shadow:10px 10px 0 rgba(41,75,115,.12);}
+  .study-table{width:100%;min-width:760px;border-collapse:collapse;table-layout:fixed;color:var(--blue);font-size:.82rem;}
+  .study-table th,.study-table td{border:1px solid var(--ink);padding:12px 10px;vertical-align:middle;text-align:center;}
+  .study-table th{background:var(--blue);color:#fff;font-size:.78rem;font-weight:600;}
+  .study-table td:first-child{font-weight:600;background:rgba(220,231,242,.5);}
+  .study-table tr{transition:background .2s,transform .2s;}
+  .study-table tbody tr:hover{background:rgba(255,255,255,.7);transform:translateX(3px);}
+  .study-table small{display:block;margin-top:4px;color:var(--ink-soft);font-size:.72rem;}
+  .study-path{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:30px 0;}
+  .cycle-card{position:relative;min-height:150px;padding:20px 16px;border:1px solid var(--line);background:var(--paper);cursor:pointer;transition:transform .3s,background .3s,color .3s,box-shadow .3s;}
+  .cycle-card::after{content:'+';position:absolute;right:14px;top:10px;font:1.3rem 'IBM Plex Mono',monospace;color:var(--teal);}
+  .cycle-card:hover,.cycle-card.active{background:var(--blue);color:#fff;transform:translateY(-7px) rotate(-1deg);box-shadow:8px 8px 0 rgba(31,111,107,.25);}
+  .cycle-card.active::after{content:'−';color:#fff;}
+  .cycle-card .cycle-no{font:700 .7rem 'IBM Plex Mono',monospace;color:var(--teal);}
+  .cycle-card.active .cycle-no{color:#BFE4DF;}
+  .cycle-card h3{margin:12px 0 7px;font:600 1.05rem 'Fraunces',serif;color:inherit;}
+  .cycle-card p{font-size:.8rem;color:var(--ink-soft);}
+  .cycle-card.active p{color:#E9F1F0;}
+  .cycle-detail{min-height:55px;margin-bottom:34px;padding:16px 20px;border-left:3px solid var(--teal);background:rgba(255,255,255,.42);color:var(--ink-soft);}
+  .questions-section{background:var(--paper);}
+  .questions-intro{max-width:70ch;color:var(--ink-soft);margin-bottom:28px;}
+  .questions-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .question-card{min-height:220px;perspective:1000px;}
+  .question-card button{position:relative;width:100%;height:220px;padding:0;border:0;background:none;color:inherit;text-align:left;cursor:pointer;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.75,.25,1);}
+  .question-card.flipped button{transform:rotateY(180deg);}
+  .question-face{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:19px;border:1px solid var(--line);background:var(--paper-2);backface-visibility:hidden;}
+  .question-face.answer{transform:rotateY(180deg);background:var(--blue);border-color:var(--blue);color:#fff;}
+  .question-number{font:500 .72rem 'IBM Plex Mono',monospace;color:var(--teal);}
+  .answer .question-number{color:#BFE4DF;}
+  .question-text{font:600 1.05rem 'Fraunces',serif;line-height:1.2;color:var(--blue);}
+  .answer .question-text{color:#fff;}
+  .question-hint{font:500 .66rem 'IBM Plex Mono',monospace;color:var(--ink-soft);}
+  .answer .question-hint{color:#DCE7F2;}
+  .question-card button:focus-visible{outline:3px solid var(--teal);outline-offset:4px;}
+  @media(max-width:860px){.study-path{grid-template-columns:1fr 1fr;}.questions-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.study-path{grid-template-columns:1fr;}.questions-grid{grid-template-columns:1fr;}.study-table{min-width:680px;}}
+  footer{max-width:1180px;margin:0 auto;padding:42px clamp(20px,6vw,96px) 58px;border-top:1px solid var(--line-soft);color:var(--ink-soft);font-size:.82rem;}
+  @media(max-width:860px){.nav-links{display:none;}.hero{grid-template-columns:1fr;min-height:auto;padding-top:42px;}.tooth-wrap{order:-1;}.examples{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav>
+  <div class="nav-mark">
+    <svg viewBox="0 0 24 24"><path d="M12 3c-3 0-5 2-5 5 0 3 1 5 1.3 8.2.2 1.8 1 2.3 1.7 2.3s1-1 1.2-2.6c.2-1.6.5-2.4 1.8-2.4s1.6.8 1.8 2.4c.2 1.6 1 2.6 1.7 2.6s1.5-.5 1.7-2.3C17 13 18 11 18 8c0-3-2-5-6-5Z" fill="none" stroke="#142935" stroke-width="1.4"/></svg>
+    Le métier de Dentiste
+  </div>
+  <ul class="nav-links">
+    <li><a href="#missions">Missions</a></li>
+    <li><a href="#prescription">Prescription</a></li>
+    <li><a href="#exemples">Exemples</a></li>
+    <li><a href="#etudes">Niveau d'études</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="label">Les professionnels de santé</div>
+    <h1><span class="title-top">Le métier de</span><span class="title-bottom">Dentiste</span></h1>
+    <p class="sub">Le dentiste aussi appelé chirurgien-dentiste est un professionnel de santé spécialisé dans la prévention, le diagnostic et le TTT des maladies des dents, de la bouche, des gencives.</p>
+  </div>
+  <div class="tooth-wrap">
+    <svg id="tooth" viewBox="0 0 220 260" aria-label="Illustration d'une dent">
+      <path class="fill-part" d="M110 20c-30 0-55 20-55 55 0 35 10 55 15 90 3 22 12 30 20 30 9 0 12-13 15-33 3-20 8-30 20-30s17 10 20 30c3 20 6 33 15 33 8 0 17-8 20-30 5-35 15-55 15-90 0-35-25-55-55-55-8 0-14 4-15 12-1-8-7-12-15-12Z"/>
+      <path d="M75 90c5-18 15-28 20-30" stroke-width="1.2"/>
+      <circle class="accent-mark" cx="150" cy="70" r="5"/>
+    </svg>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="missions">
+  <div class="section-head"><div><div class="label">01 — Missions</div><h2>Missions</h2></div></div>
+  <p class="section-intro">Informer les patients sur l’hygiène bucco-dentaire et les bonnes habitudes alimentaires pour éviter les risques caries.</p>
+  <ul class="content-list">
+    <li>Examiner la cavité buccale et réaliser des radiographies pour identifier les infections ou les caries</li>
+    <li>Examiner : les dents, les gencives et la bouche</li>
+    <li>prévenir : l’apparition des problèmes bucco-dentaires</li>
+    <li>restaurer : les dents abîmées ou cariées</li>
+    <li>Donner des conseils sur l’hygiène bucco dentaire et le brossage des dents</li>
+    <li>Soins : Réaliser des traitements tels que le plombage, l’extraction de dents et la pose de prothèse</li>
+  </ul>
+</section>
+
+<hr class="rule">
+
+<section id="prescription">
+  <div class="section-head"><div><div class="label">02 — Statut</div><h2>Intervention ou non sur prescription</h2></div></div>
+  <div class="prescription">
+    <p>Le dentiste peut intervenir sans prescription médicale. Un patient peut prendre directement rendez-vous avec un chirurgien-dentiste pour un contrôle ou pour un problème dentaire.</p>
+    <p>Le dentiste est lui-même habilité à établir un diagnostic et à prescrire certains médicaments ou examens lorsqu’ils sont nécessaires à la prise en charge du patient.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="exemples">
+  <div class="section-head"><div><div class="label">03 — Mise en pratique</div><h2>Exemples :</h2></div></div>
+  <div class="examples">
+    <article class="example"><h3>Le dentiste soigne une carie</h3><p>Le dentiste examine les dents du patient afin de détecter les caries et les soigner.</p></article>
+    <article class="example"><h3>L’hygiène bucco-dentaire</h3><p>Le dentiste donne des conseils pour avoir une bonne hygiène bucco-dentaire et éviter les caries.</p></article>
+    <article class="example"><h3>La radiographie dentaire</h3><p>Le dentiste peut être remmener à réaliser ou demander une radiographie observer les dents et détecter certains problèmes.</p></article>
+    <article class="example"><h3>La prise en charge adaptée</h3><p>Le dentiste collabore avec différents professionnels de santé afin d’assurer une prise en charge adaptée au patient.</p></article>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="etudes" class="study-section">
+  <div class="section-head"><div><div class="label">04 — Formation</div><h2>Niveau d'études</h2></div></div>
+  <p class="study-intro">Pour accéder à l'odontologie, deux voies sont proposées : le <strong>PASS</strong> (parcours d'accès spécifique santé) et la <strong>LAS</strong> (licence avec option accès santé). Voici le parcours complet, du premier cycle jusqu'à l'internat.</p>
+
+  <div class="study-table-wrap">
+    <table class="study-table">
+      <thead><tr><th>Cycle</th><th>Années</th><th>Au programme</th><th>Diplôme</th><th>Niveau</th></tr></thead>
+      <tbody>
+        <tr><td>1er cycle</td><td>2e-3e</td><td>Anatomie de la dent, de la tête et du cou, prévention et traitements des maladies bucco-dentaires, santé publique et imagerie médicale.<small>Le format alterne cours magistraux (CM), travaux dirigés (TD) et surtout beaucoup de travaux pratiques (TP).</small></td><td>DFGSO<br>(Diplôme de Formation Générale en Sciences Odontologiques)</td><td>Licence<br>(bac+3)</td></tr>
+        <tr><td>2e cycle</td><td>4e-5e</td><td>Soins sur vrais patients au CHU, odontologie légale, anesthésiologie</td><td>DFASO<br>(Diplôme de Formation Approfondie en Sciences Odontologiques)</td><td>Master<br>(bac+5)</td></tr>
+        <tr><td>3e cycle court</td><td>6e</td><td>Exercice autonome, gestion de cabinet, thèse</td><td>DE (diplôme d'état)<br>chirurgie dentaire</td><td>Bac+6</td></tr>
+        <tr><td>Internat</td><td>3-4 ans</td><td>Spécialisation : orthodontie, chirurgie orale, médecine bucco-dentaire</td><td>DE + DES<br>(diplôme d'état, spécialisation)</td><td>Bac+8/9</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="study-path" aria-label="Cycles d'études interactifs">
+    <article class="cycle-card active" data-cycle="1"><span class="cycle-no">ÉTAPE 01</span><h3>Découvrir</h3><p>Les bases scientifiques et les premiers gestes.</p></article>
+    <article class="cycle-card" data-cycle="2"><span class="cycle-no">ÉTAPE 02</span><h3>Soigner</h3><p>Les premiers patients et la pratique clinique.</p></article>
+    <article class="cycle-card" data-cycle="3"><span class="cycle-no">ÉTAPE 03</span><h3>S'autonomiser</h3><p>Le diplôme d'État et l'exercice en cabinet.</p></article>
+    <article class="cycle-card" data-cycle="4"><span class="cycle-no">ÉTAPE 04</span><h3>Se spécialiser</h3><p>L'internat et les spécialités dentaires.</p></article>
+  </div>
+  <div class="cycle-detail" id="cycleDetail">Étape 1 : on acquiert les bases de l'anatomie, de la prévention et des sciences odontologiques.</div>
+
+</section>
+
+<hr class="rule">
+
+<section id="questions" class="questions-section">
+  <div class="section-head"><div><div class="label">05 — Cartes ouvertes</div><h2>10 questions sur le métier</h2></div></div>
+  <p class="questions-intro">Cliquez sur une question pour retourner la carte et découvrir la réponse. Toutes les réponses viennent du contenu de cette page.</p>
+  <div class="questions-grid" id="questionsGrid"></div>
+</section>
+
+<footer>Le métier de dentiste : prévention, diagnostic, soins et accompagnement du patient.</footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const page = document.documentElement;
+    progress.style.width = (page.scrollTop / (page.scrollHeight - page.clientHeight) * 100) + '%';
+  });
+
+  const cycleDetails = {
+    1: 'Étape 1 : on acquiert les bases de l’anatomie, de la prévention et des sciences odontologiques.',
+    2: 'Étape 2 : on soigne de vrais patients au CHU et l’on approfondit l’odontologie clinique.',
+    3: 'Étape 3 : on devient autonome, on prépare sa thèse et l’on obtient le diplôme d’État.',
+    4: 'Étape 4 : l’internat permet de se spécialiser en orthodontie, chirurgie orale ou médecine bucco-dentaire.'
+  };
+  document.querySelectorAll('.cycle-card').forEach(card => card.addEventListener('click', () => {
+    document.querySelectorAll('.cycle-card').forEach(item => item.classList.remove('active'));
+    card.classList.add('active');
+    document.getElementById('cycleDetail').textContent = cycleDetails[card.dataset.cycle];
+  }));
+
+  const questions = [
+    ['Quel est le rôle principal du dentiste en matière de prévention ?','Informer les patients sur l’hygiène bucco-dentaire et les bonnes habitudes alimentaires.'],
+    ['Que peut examiner le dentiste lors d’un rendez-vous ?','La cavité buccale, les dents, les gencives et la bouche.'],
+    ['Comment le dentiste peut-il prévenir les problèmes bucco-dentaires ?','En donnant des conseils sur l’hygiène bucco-dentaire et le brossage des dents.'],
+    ['Quels soins peuvent restaurer une dent abîmée ou cariée ?','Le plombage, l’extraction de dents ou la pose de prothèses, selon le besoin.'],
+    ['Le patient a-t-il besoin d’une prescription pour consulter un dentiste ?','Non. Il peut prendre directement rendez-vous avec un chirurgien-dentiste.'],
+    ['Que peut prescrire le dentiste lui-même ?','Certains médicaments ou examens lorsqu’ils sont nécessaires à la prise en charge.'],
+    ['Quelles sont les deux voies d’accès aux études d’odontologie ?','Le PASS, parcours d’accès spécifique santé, et la LAS, licence avec option accès santé.'],
+    ['Que se passe-t-il pendant le deuxième cycle ?','Les étudiants soignent de vrais patients au CHU et approfondissent notamment l’odontologie légale et l’anesthésiologie.'],
+    ['À quel moment le futur dentiste exerce-t-il de façon autonome ?','Pendant le troisième cycle court, après l’obtention du diplôme d’État.'],
+    ['À quoi sert l’internat en odontologie ?','À se spécialiser en orthodontie, chirurgie orale ou médecine bucco-dentaire.']
+  ];
+  const questionsGrid = document.getElementById('questionsGrid');
+  questions.forEach((item,index) => {
+    const card = document.createElement('article');
+    card.className = 'question-card';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('aria-pressed','false');
+    button.setAttribute('aria-label','Afficher la réponse à la question ' + (index + 1));
+    button.innerHTML = '<span class="question-face"><span class="question-number">QUESTION ' + String(index + 1).padStart(2,'0') + '</span><span class="question-text"></span><span class="question-hint">Cliquer pour retourner</span></span><span class="question-face answer"><span class="question-number">RÉPONSE</span><span class="question-text"></span><span class="question-hint">Cliquer pour revenir</span></span>';
+    button.querySelectorAll('.question-text')[0].textContent = item[0];
+    button.querySelectorAll('.question-text')[1].textContent = item[1];
+    button.addEventListener('click', () => {
+      const flipped = card.classList.toggle('flipped');
+      button.setAttribute('aria-pressed', String(flipped));
+    });
+    card.appendChild(button);
+    questionsGrid.appendChild(card);
+  });
+</script>
+</body>
+</html>
